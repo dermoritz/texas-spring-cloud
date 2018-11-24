@@ -1,0 +1,51 @@
+version: '3.3'
+
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 172.21.1.0/24
+
+services:
+  texas-eureka:
+    image: texas-eureka:0.0.1-SNAPSHOT
+    networks:
+      backend:
+        ipv4_address: 172.21.1.5
+        aliases:
+          - eureka
+#    volumes:
+#      - C:/Users/moritz/entwicklung/texas-112018/jar-volumes/eureka:/usr/share/myservice/
+    ports:
+      - "8761:8761"
+  texas-webgateway:
+    image: texas-webgateway:0.0.1-SNAPSHOT
+    networks:
+        backend:
+          aliases:
+            - webgateway
+    # volumes:
+    #   - C:/Users/moritz/entwicklung/texas-112018/jar-volumes/webgateway:/usr/share/myservice/
+    ports:
+      - "80:80"
+  texas-one:
+    image: texas-service-one:0.0.1-SNAPSHOT
+    networks:
+      backend:
+        aliases:
+          - texas-one    
+    # volumes:
+    #   - C:/Users/moritz/entwicklung/texas-112018/jar-volumes/one:/usr/share/myservice/ 
+    ports:
+      - "8085:8080"
+  texas-two:
+    image: texas-service-two:0.0.1-SNAPSHOT
+    networks:
+      backend:
+        aliases:
+          - texas-two    
+    # volumes:
+    #   - C:/Users/moritz/entwicklung/texas-112018/jar-volumes/two:/usr/share/myservice/   
+    ports:
+      - "8086:8080"
+

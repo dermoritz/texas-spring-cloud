@@ -1,0 +1,27 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: webgateway
+  #    hostname: localhost # should be set from docker env variable
+  client:
+    fetch-registry: true
+    registerWithEureka: true
+    enabled: true
+    #healthcheck:
+    #  enabled: false
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+
+zuul:
+  routes:
+    texas-one:
+      path: /one/**
+      stripPrefix: true
+      serviceId: texas-one
+    texas-two:
+      path: /two/**
+      stripPrefix: true
+      serviceId: texas-two
+
+server:
+  port: 80

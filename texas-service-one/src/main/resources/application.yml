@@ -1,0 +1,12 @@
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: texas-one
+  #    hostname: localhost # should be set from docker env variable
+  client:
+    registerWithEureka: true
+    enabled: true
+    healthcheck:
+      enabled: false
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
